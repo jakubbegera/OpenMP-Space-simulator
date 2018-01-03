@@ -17,7 +17,7 @@ void SpaceSimulator::execute() {
     }
 
     for (int i = 0; i < numberOfIterations; ++i) {
-        if (i % (numberOfIterations/10) == 0) {
+        if (DEBUG && i % (numberOfIterations/10) == 0) {
             cout << "Iteration: " << i  << endl;
         }
         doIteration();
