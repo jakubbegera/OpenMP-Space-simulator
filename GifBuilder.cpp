@@ -15,7 +15,7 @@ GifBuilder::GifBuilder(double maxAbsXY, const char *outputFile, int iterations) 
     GifBegin(this->writer, outputFile, GIF_SIZE, GIF_SIZE, GIF_DELAY);
 }
 
-void GifBuilder::addFrame(const vector<MassPoint *> &points, int iteration) {
+void GifBuilder::addFrame(const vector<MassPoint *> &points) {
 
     for (int i = 0; i < this->imageSize; ++i) {
         this->frames[i] = 0;

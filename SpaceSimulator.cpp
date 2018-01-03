@@ -11,16 +11,40 @@ SpaceSimulator::SpaceSimulator(const int numberOfIterations, const vector<MassPo
 void SpaceSimulator::execute() {
     for (int i = 0; i < numberOfIterations; ++i) {
         doIteration();
-        gifBuilder.addFrame(massPoints, i);
+    #if GIF_GENERATE
+        if (i % GIF_STEP == 0) {
+            gifBuilder.addFrame(massPoints);
+        }
+    #endif
     }
+    #if GIF_GENERATE
     gifBuilder.done();
+    #endif
 }
 
 void SpaceSimulator::doIteration() {
     for (int i = 0; i < massPoints.size(); ++i) {
         MassPoint *&mp = massPoints[i];
-        mp->x = mp->x/2;
-        mp->y = mp->y/2;
+        double forceX = 0;
+        double forceY = 0;
+
+        for (int j = 0; j < massPoints.size(); ++j) {
+            if (i == j) continue;
+            MassPoint *&mpOther = massPoints[j];
+            double dist = mp->dist(mpOther);
+            double distX = mp->distX(mpOther);
+            double distY = mp->distY(mpOther);
+            double force = mp->force(mpOther);
+            forceX += force * distX / dist;
+            forceY += force * distY / dist;
+        }
+
+        mp->moveX += ((forceX / mp->weight) * TIME_CONSTANT * TIME_CONSTANT / 2);
+        mp->moveY += ((forceY / mp->weight) * TIME_CONSTANT * TIME_CONSTANT / 2);
+    }
+
+    for (int i = 0; i < massPoints.size(); ++i) {
+        massPoints[i]->doMove();
     }
 
 }

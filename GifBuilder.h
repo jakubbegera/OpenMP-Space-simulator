@@ -15,7 +15,7 @@ using namespace std;
 class GifBuilder {
 public:
     GifBuilder(double maxAbsXY, const char *outputFile, int iterations);
-    void addFrame(const vector<MassPoint *> &points, int iterations);
+    void addFrame(const vector<MassPoint *> &points);
     void done();
 private:
     double maxAbsXY;
