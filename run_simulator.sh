@@ -33,7 +33,9 @@ do
     do
         export OMP_NUM_THREADS="$thread"
         export INSTANCE="$instance"
+        echo $OMP_NUM_THREADS
         ./space $DATADIR/data/in_$INSTANCE.txt $DATADIR/data/out_$INSTANCE_$OMP_NUM_THREADS.gif 200
+        echo "-----------------------------------------------------------"
     done
 done
 
