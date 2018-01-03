@@ -7,6 +7,9 @@
 
 #include <cmath>
 #include "settings.h"
+#if PARALLEL
+#include <omp.h>
+#endif
 
 
 class MassPoint {

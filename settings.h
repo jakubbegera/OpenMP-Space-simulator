@@ -6,6 +6,7 @@
 #define GENERATOR_SETTINGS_H
 
 #define DEBUG true
+#define PARALLEL false
 #define GRAVITATIONAL_CONSTANT 6.67408e-11
 #define TIME_CONSTANT (60 * 60 * 24 * 7)
 #define ANIM_SPEED 500

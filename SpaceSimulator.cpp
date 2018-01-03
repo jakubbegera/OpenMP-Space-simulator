@@ -2,7 +2,6 @@
 // Created by Jakub Begera on 03.01.18.
 //
 
-#include <iostream>
 #include "SpaceSimulator.h"
 
 SpaceSimulator::SpaceSimulator(const int numberOfIterations, const vector<MassPoint *> &massPoints,
@@ -34,11 +33,17 @@ void SpaceSimulator::execute() {
 }
 
 void SpaceSimulator::doIteration() {
+    #if PARALLEL
+        #pragma omp parallel for
+    #endif
     for (int i = 0; i < massPoints.size(); ++i) {
         MassPoint *&mp = massPoints[i];
         double forceX = 0;
         double forceY = 0;
 
+        #if PARALLEL
+            #pragma omp simd reduction(+ : forceX, forceY)
+        #endif
         for (int j = 0; j < massPoints.size(); ++j) {
             if (i == j) continue;
             MassPoint *&mpOther = massPoints[j];

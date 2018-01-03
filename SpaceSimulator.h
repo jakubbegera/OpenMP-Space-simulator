@@ -8,6 +8,12 @@
 #include <vector>
 #include "MassPoint.h"
 #include "GifBuilder.h"
+#include <iostream>
+
+#if PARALLEL
+#include <omp.h>
+#endif
+
 
 using namespace std;
 
