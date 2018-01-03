@@ -5,6 +5,9 @@
 #include <math.h>
 #include "MassPoint.h"
 #include "SpaceSimulator.h"
+#if PARALLEL
+#include <omp.h>
+#endif
 
 using namespace std;
 
@@ -85,5 +88,10 @@ int main(int argc, char *argv[]) {
 
     cout << "Elapsed time: " << chrono::duration_cast<chrono::duration<double>>(endTimestamp - startTimestamp).count()
          << " s" << endl;
+    cout << "Input path: " << inputPath << endl;
+    cout << "iterations: " << numberOfIterations << endl;
+    #if PARALLEL
+        cout << "CPUs: " << omp_get_num_procs() << endl;
+    #endif
     return 0;
 }
