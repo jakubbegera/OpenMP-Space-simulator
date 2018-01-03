@@ -2,6 +2,7 @@
 // Created by Jakub Begera on 03.01.18.
 //
 
+#include <iostream>
 #include "SpaceSimulator.h"
 
 SpaceSimulator::SpaceSimulator(const int numberOfIterations, const vector<MassPoint *> &massPoints,
@@ -10,15 +11,18 @@ SpaceSimulator::SpaceSimulator(const int numberOfIterations, const vector<MassPo
 
 void SpaceSimulator::execute() {
     for (int i = 0; i < numberOfIterations; ++i) {
-        doIteration();
-    #if GIF_GENERATE
-        if (i % GIF_STEP == 0) {
-            gifBuilder.addFrame(massPoints);
+        if (i % (numberOfIterations/10) == 0) {
+            cout << "Iteration: " << i  << endl;
         }
-    #endif
+        doIteration();
+        #if GIF_GENERATE
+            if (i % GIF_STEP == 0) {
+                gifBuilder.addFrame(massPoints);
+            }
+        #endif
     }
     #if GIF_GENERATE
-    gifBuilder.done();
+        gifBuilder.done();
     #endif
 }
 

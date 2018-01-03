@@ -3,6 +3,7 @@
 //
 
 #include <math.h>
+#include <iostream>
 #include "GifBuilder.h"
 
 
@@ -31,15 +32,15 @@ void GifBuilder::addFrame(const vector<MassPoint *> &points) {
 
         if (mp->weight > 1e35) {
             // sun
-            for (int j = -GIF_SUN_DIAMETER; j <= GIF_SUN_DIAMETER; ++j) {
-                for (int k = -GIF_SUN_DIAMETER; k <= GIF_SUN_DIAMETER; ++k) {
-                    if (sqrt(j*j + k*k) <= GIF_SUN_DIAMETER) {
-                        printPoint(j, k, 250, 250, 5, 0);
+            for (int j = x - GIF_SUN_DIAMETER; j <= x + GIF_SUN_DIAMETER; ++j) {
+                for (int k = y - GIF_SUN_DIAMETER; k <= y + GIF_SUN_DIAMETER; ++k) {
+                    if (sqrt((x-j)*(x-j) + (y-k)*(y-k)) <= GIF_SUN_DIAMETER) {
+                        printPoint(j, k);
                     }
                 }
             }
-        } else{
-            printPoint(x, y, 255, 255, 255, 0);
+        } else {
+            printPoint(x, y);
         }
     }
     GifWriteFrame(writer, frames, GIF_SIZE, GIF_SIZE, GIF_DELAY, 8, true);
@@ -49,13 +50,12 @@ void GifBuilder::done() {
     GifEnd(writer);
 }
 
-void GifBuilder::printPoint(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+void GifBuilder::printPoint(int x, int y) {
     uint32_t index = static_cast<uint32_t>(4 * (x + y * GIF_SIZE));
-
     if (index + 3 <= imageSize) {
-        frames[index] = r;
-        frames[index + 1] = g;
-        frames[index + 2] = b;
-        frames[index + 3] = a;
+        frames[index] = 255;
+        frames[index + 1] = 255;
+        frames[index + 2] = 255;
+        frames[index + 3] = 0;
     }
 }

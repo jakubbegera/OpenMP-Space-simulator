@@ -14,7 +14,7 @@
 #define GIF_STEP 10
 #define GIF_DELAY 5
 #define GIF_SIZE 800
-#define GIF_SUN_DIAMETER 10
+#define GIF_SUN_DIAMETER 8
 
 
 
