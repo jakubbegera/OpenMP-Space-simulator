@@ -75,7 +75,6 @@ int main(int argc, char *argv[]) {
 
     readInput(inputPath);
 
-//    GifBuilder* gifBuilder = new GifBuilder(getMaxXY(), outputPath, numberOfIterations);
     GifBuilder gifBuilder(getMaxXY(), outputPath, numberOfIterations);
     SpaceSimulator spaceSimulator(numberOfIterations, massPoints, gifBuilder, outputPath);
 

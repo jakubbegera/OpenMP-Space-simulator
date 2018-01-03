@@ -24,7 +24,7 @@ private:
     GifWriter *writer;
     int imageSize;
     uint8_t* frames;
-    void printPoint(int x, int y);
+    void printPoint(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 };
 
 
