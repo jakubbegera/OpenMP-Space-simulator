@@ -4,6 +4,10 @@
 
 #include "MassPoint.h"
 
+#include <random>
+#include <cmath>
+using namespace std;
+
 MassPoint::MassPoint(double x, double y, const double weight) : x(x), y(y), weight(weight) {
 
 }
@@ -28,4 +32,9 @@ double MassPoint::force(MassPoint *mp) {
 void MassPoint::doMove() {
     x+=moveX * TIME_CONSTANT;
     y+=moveY * TIME_CONSTANT;
+}
+
+void MassPoint::initInitialMove(const double maxAbsXY) {
+    moveX = (y / maxAbsXY) * TIME_CONSTANT * ANIM_SPEED;
+    moveY = (-x / maxAbsXY) * TIME_CONSTANT * ANIM_SPEED;
 }

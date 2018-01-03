@@ -24,6 +24,7 @@ public:
     double force(MassPoint *mp);
 
     void doMove();
+    void initInitialMove(const double maxAbsXY);
 };
 
 

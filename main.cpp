@@ -75,8 +75,9 @@ int main(int argc, char *argv[]) {
 
     readInput(inputPath);
 
-    GifBuilder gifBuilder(getMaxXY(), outputPath, numberOfIterations);
-    SpaceSimulator spaceSimulator(numberOfIterations, massPoints, gifBuilder, outputPath);
+    double maxAbsXY = getMaxXY();
+    GifBuilder gifBuilder(maxAbsXY, outputPath, numberOfIterations);
+    SpaceSimulator spaceSimulator(numberOfIterations, massPoints, gifBuilder, outputPath, maxAbsXY);
 
     chrono::high_resolution_clock::time_point startTimestamp = chrono::high_resolution_clock::now();
     spaceSimulator.execute();

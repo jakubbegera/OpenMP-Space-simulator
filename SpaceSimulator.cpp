@@ -6,10 +6,17 @@
 #include "SpaceSimulator.h"
 
 SpaceSimulator::SpaceSimulator(const int numberOfIterations, const vector<MassPoint *> &massPoints,
-                               GifBuilder &gifBuilder, const char *outputPath) : numberOfIterations(
-        numberOfIterations), massPoints(massPoints), gifBuilder(gifBuilder), outputPath(outputPath) {}
+                               GifBuilder &gifBuilder, const char *outputPath, const double maxAbsXY) :
+        numberOfIterations(numberOfIterations), massPoints(massPoints), gifBuilder(gifBuilder), outputPath(outputPath),
+        maxAbsXY(maxAbsXY) {}
 
 void SpaceSimulator::execute() {
+
+    //init initial movement
+    for (int i = 0; i < massPoints.size(); ++i) {
+        massPoints[i]->initInitialMove(maxAbsXY);
+    }
+
     for (int i = 0; i < numberOfIterations; ++i) {
         if (i % (numberOfIterations/10) == 0) {
             cout << "Iteration: " << i  << endl;

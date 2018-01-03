@@ -8,6 +8,7 @@
 #define DEBUG true
 #define GRAVITATIONAL_CONSTANT 6.67408e-11
 #define TIME_CONSTANT (60 * 60 * 24 * 7)
+#define ANIM_SPEED 500
 
 // GIF settings
 #define GIF_GENERATE true
