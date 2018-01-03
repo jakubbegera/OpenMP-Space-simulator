@@ -31,11 +31,16 @@ for thread in 1 2 4 8 16 32
 do
     for instance in 200 400 800 1600 3200
     do
-        export OMP_NUM_THREADS="$thread"
-        export INSTANCE="$instance"
-        echo $OMP_NUM_THREADS
-        ./space $DATADIR/data/in_$INSTANCE.txt $DATADIR/data/out_$INSTANCE_$OMP_NUM_THREADS.gif 200
-        echo "-----------------------------------------------------------"
+        for run in 1 2 3 4 5
+        do
+            export RUN="$run"
+            export OMP_NUM_THREADS="$thread"
+            export INSTANCE="$instance"
+            echo $OMP_NUM_THREADS
+            echo $RUN
+            ./space $DATADIR/data/in_$INSTANCE.txt $DATADIR/data/out_$INSTANCE_$OMP_NUM_THREADS.gif 200
+            echo "-----------------------------------------------------------"
+        done
     done
 done
 
