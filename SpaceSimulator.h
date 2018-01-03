@@ -7,18 +7,21 @@
 
 #include <vector>
 #include "MassPoint.h"
+#include "GifBuilder.h"
 
 using namespace std;
 
 class SpaceSimulator {
 public:
-    SpaceSimulator(const vector<MassPoint *> &massPoints, const char *outputPath, const int numberOfIterations);
+    SpaceSimulator(const int numberOfIterations, const vector<MassPoint *> &massPoints, GifBuilder &gifBuilder,
+                   const char *outputPath);
 
     void execute();
 private:
-    vector<MassPoint*> massPoints;
-    const char *outputPath;
     const int numberOfIterations;
+    vector<MassPoint*> massPoints;
+    GifBuilder gifBuilder;
+    const char *outputPath;
     void doIteration();
 };
 

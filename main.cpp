@@ -2,15 +2,12 @@
 #include <fstream>
 #include <vector>
 #include <chrono>
+#include <math.h>
 #include "MassPoint.h"
 #include "SpaceSimulator.h"
 
 using namespace std;
 
-#define DEBUG true
-#define GRAVITATIONAL_CONSTANT 6.67408e-11
-#define GIF_STEP 5
-#define GIF_DELAY 5
 
 vector<MassPoint *> massPoints;
 double maxX = 0;
@@ -47,6 +44,25 @@ void readInput(const string &file) {
     }
 }
 
+double getMaxXY() {
+    double max = 0;
+
+    if (abs(minX) > max) {
+        max = abs(minX);
+    }
+    if (abs(minY) > max) {
+        max = abs(minY);
+    }
+    if (abs(maxX) > max) {
+        max = abs(maxX);
+    }
+    if (abs(maxY) > max) {
+        max = abs(maxY);
+    }
+
+    return max;
+}
+
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         cerr << "Not enough arguments given! Expected:\n[0] input file\n[1] output file\n[2] number of iterations"
@@ -58,10 +74,15 @@ int main(int argc, char *argv[]) {
     const int numberOfIterations = stoi(argv[3]);
 
     readInput(inputPath);
-    SpaceSimulator spaceSimulator(massPoints, outputPath, numberOfIterations);
+
+//    GifBuilder* gifBuilder = new GifBuilder(getMaxXY(), outputPath, numberOfIterations);
+    GifBuilder gifBuilder(getMaxXY(), outputPath, numberOfIterations);
+    SpaceSimulator spaceSimulator(numberOfIterations, massPoints, gifBuilder, outputPath);
+
     chrono::high_resolution_clock::time_point startTimestamp = chrono::high_resolution_clock::now();
     spaceSimulator.execute();
     chrono::high_resolution_clock::time_point endTimestamp = chrono::high_resolution_clock::now();
+
     cout << "Elapsed time: " << chrono::duration_cast<chrono::duration<double>>(endTimestamp - startTimestamp).count()
          << " s" << endl;
     return 0;

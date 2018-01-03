@@ -4,14 +4,16 @@
 
 #include "SpaceSimulator.h"
 
-SpaceSimulator::SpaceSimulator(const vector<MassPoint *> &massPoints, const char *outputPath,
-                               const int numberOfIterations) : massPoints(massPoints), outputPath(outputPath),
-                                                               numberOfIterations(numberOfIterations) {}
+SpaceSimulator::SpaceSimulator(const int numberOfIterations, const vector<MassPoint *> &massPoints,
+                               GifBuilder &gifBuilder, const char *outputPath) : numberOfIterations(
+        numberOfIterations), massPoints(massPoints), gifBuilder(gifBuilder), outputPath(outputPath) {}
 
 void SpaceSimulator::execute() {
     for (int i = 0; i < numberOfIterations; ++i) {
         doIteration();
+        gifBuilder.addFrame(massPoints, i);
     }
+    gifBuilder.done();
 }
 
 void SpaceSimulator::doIteration() {
