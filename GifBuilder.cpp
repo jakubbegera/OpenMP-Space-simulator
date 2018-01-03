@@ -13,7 +13,9 @@ GifBuilder::GifBuilder(double maxAbsXY, const char *outputFile, int iterations) 
     this->writer = new GifWriter();
     this->imageSize = 4 * GIF_SIZE * GIF_SIZE; // 4 bytes per pixel (RGBA)
     this->frames = new uint8_t[this->imageSize];
+    #if GIF_GENERATE
     GifBegin(this->writer, outputFile, GIF_SIZE, GIF_SIZE, GIF_DELAY);
+    #endif
 }
 
 void GifBuilder::addFrame(const vector<MassPoint *> &points) {
