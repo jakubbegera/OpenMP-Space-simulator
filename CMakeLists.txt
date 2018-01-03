@@ -4,5 +4,5 @@ project(generator)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(space main.cpp)
+add_executable(space main.cpp MassPoint.cpp MassPoint.h SpaceSimulator.cpp SpaceSimulator.h)
 add_executable(generator generator.cpp)
