@@ -60,8 +60,8 @@ void SpaceSimulator::doIteration() {
         mp->moveY += ((forceY / mp->weight) * TIME_CONSTANT * TIME_CONSTANT / 2);
     }
 
-    for (int i = 0; i < massPoints.size(); ++i) {
-        massPoints[i]->doMove();
+    for (auto &massPoint : massPoints) {
+        massPoint->doMove();
     }
 
 }

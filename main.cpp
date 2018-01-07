@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <chrono>
-#include <math.h>
+#include <cmath>
 #include "MassPoint.h"
 #include "SpaceSimulator.h"
 #if PARALLEL

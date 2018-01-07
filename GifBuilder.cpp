@@ -58,7 +58,7 @@ void GifBuilder::done() {
 }
 
 void GifBuilder::printPoint(int x, int y) {
-    uint32_t index = static_cast<uint32_t>(4 * (x + y * GIF_SIZE));
+    auto index = static_cast<uint32_t>(4 * (x + y * GIF_SIZE));
     if (index + 3 <= imageSize) {
         frames[index] = 255;
         frames[index + 1] = 255;
