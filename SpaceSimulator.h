@@ -20,7 +20,7 @@ using namespace std;
 class SpaceSimulator {
 public:
     SpaceSimulator(const int numberOfIterations, const vector<MassPoint *> &massPoints, GifBuilder &gifBuilder,
-                   const char *outputPath, const double maxAbsXY);
+                   const char *outputPath, const double maxAbsXY, const double initialSpeed);
 
     void execute();
 private:
@@ -29,6 +29,7 @@ private:
     GifBuilder gifBuilder;
     const char *outputPath;
     const double maxAbsXY;
+    const double initialSpeed;
     void doIteration();
 };
 

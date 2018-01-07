@@ -67,20 +67,26 @@ double getMaxXY() {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 4) {
-        cerr << "Not enough arguments given! Expected:\n[0] input file\n[1] output file\n[2] number of iterations"
+    if (argc != 5) {
+        cerr << "Not enough arguments given! Expected:\n[0] input file\n[1] output file\n[2] number of iterations\n"
+                "[3] initial speed (double <0,1>)"
              << endl;
         return 1;
     }
     const char *inputPath = argv[1];
     const char *outputPath = argv[2];
     const int numberOfIterations = stoi(argv[3]);
+    const double initialSpeed = stod(argv[4]);
+    if (initialSpeed < 0 || initialSpeed > 1) {
+        cerr << "Initial speed is not in interval <0,1>" << endl;
+        return 2;
+    }
 
     readInput(inputPath);
 
     double maxAbsXY = getMaxXY();
     GifBuilder gifBuilder(maxAbsXY, outputPath, numberOfIterations);
-    SpaceSimulator spaceSimulator(numberOfIterations, massPoints, gifBuilder, outputPath, maxAbsXY);
+    SpaceSimulator spaceSimulator(numberOfIterations, massPoints, gifBuilder, outputPath, maxAbsXY, initialSpeed);
 
     chrono::high_resolution_clock::time_point startTimestamp = chrono::high_resolution_clock::now();
     spaceSimulator.execute();

@@ -34,7 +34,7 @@ void MassPoint::doMove() {
     y+=moveY * TIME_CONSTANT;
 }
 
-void MassPoint::initInitialMove(const double maxAbsXY) {
-    moveX = (y / maxAbsXY) * TIME_CONSTANT * ANIM_SPEED;
-    moveY = (-x / maxAbsXY) * TIME_CONSTANT * ANIM_SPEED;
+void MassPoint::initInitialMove(const double maxAbsXY, const double initialSpeed) {
+    moveX = initialSpeed * (y / maxAbsXY) * TIME_CONSTANT * ANIM_SPEED;
+    moveY = initialSpeed * (-x / maxAbsXY) * TIME_CONSTANT * ANIM_SPEED;
 }
