@@ -22,15 +22,11 @@ void SpaceSimulator::execute() {
             cout << "Iteration: " << i  << endl;
         }
         doIteration();
-        #if GIF_GENERATE
-            if (i % GIF_STEP == 0) {
-                gifBuilder.addFrame(massPoints);
-            }
-        #endif
+        if (i % GIF_STEP == 0) {
+            gifBuilder.addFrame(massPoints);
+        }
     }
-    #if GIF_GENERATE
-        gifBuilder.done();
-    #endif
+    gifBuilder.done();
 }
 
 void SpaceSimulator::doIteration() {
@@ -60,6 +56,9 @@ void SpaceSimulator::doIteration() {
         mp->moveY += ((forceY / mp->weight) * TIME_CONSTANT * TIME_CONSTANT / 2);
     }
 
+    #if PARALLEL
+        #pragma omp parallel for
+    #endif
     for (auto &massPoint : massPoints) {
         massPoint->doMove();
     }
