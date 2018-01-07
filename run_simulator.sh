@@ -38,7 +38,7 @@ do
             export INSTANCE="$instance"
             echo $OMP_NUM_THREADS
             echo $RUN
-            ./space $DATADIR/data/in_$INSTANCE.txt $DATADIR/data/out_$INSTANCE_$OMP_NUM_THREADS.gif 200
+            ./space $DATADIR/data/in_$INSTANCE.txt $DATADIR/data/out_$INSTANCE_$OMP_NUM_THREADS.gif 500 0.8
             echo "-----------------------------------------------------------"
         done
     done
