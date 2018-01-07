@@ -59,8 +59,8 @@ void SpaceSimulator::doIteration() {
     #if PARALLEL
         #pragma omp parallel for
     #endif
-    for (auto &massPoint : massPoints) {
-        massPoint->doMove();
+    for (int i = 0; i < massPoints.size(); ++i) {
+        massPoints[i]->doMove();
     }
 
 }
