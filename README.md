@@ -2,6 +2,8 @@
 Semestral project for B4M35PAG subject at FEE CTU in Prague, simulating movement of mass points in the space, inspired
 by Kepler's laws of planetary motion. Project is writen in C++.
 
+<img src="https://raw.githubusercontent.com/jakubbegera/OpenMP-Space-simulator/master/data/out_10000x500_0.8.gif" width="60%" height="60%">
+
 ## How to run it?
 Mandatory arguments:
 - [0] input file (string)
